@@ -1,3 +1,5 @@
+import entries from '@cycjimmy/awesome-js-funcs/esm/object/entries';
+
 /**
  * A requestAnimationFrame wrapper / polyfill.
  *
@@ -6,16 +8,15 @@
  */
 export default (() => {
   // Check for request animation Frame support
-  const requestFrame =
-    window.requestAnimationFrame ||
-    window.webkitRequestAnimationFrame ||
-    window.mozRequestAnimationFrame ||
-    window.oRequestAnimationFrame;
+  const requestFrame = window.requestAnimationFrame
+    || window.webkitRequestAnimationFrame
+    || window.mozRequestAnimationFrame
+    || window.oRequestAnimationFrame;
   let isNative = !!requestFrame;
 
   if (
-    requestFrame &&
-    !/requestAnimationFrame\(\)\s*\{\s*\[native code\]\s*\}/i.test(requestFrame.toString())
+    requestFrame
+    && !/requestAnimationFrame\(\)\s*\{\s*\[native code\]\s*\}/i.test(requestFrame.toString())
   ) {
     isNative = false;
   }
@@ -28,45 +29,41 @@ export default (() => {
 
   const TARGET_FPS = 60;
   let requests = {};
-  // eslint-disable-next-line no-unused-vars
-  let requestCount = 0;
   let rafHandle = 1;
   let intervalHandle = null;
   let lastActive = +new Date();
 
-  // eslint-disable-next-line func-names
-  return function(callback) {
-    const callbackHandle = rafHandle++;
+  return (callback) => {
+    const callbackHandle = rafHandle;
+    rafHandle += 1;
 
     // Store callback
     requests[callbackHandle] = callback;
-    requestCount++;
 
     // Create timeout at first request
     if (intervalHandle === null) {
-      intervalHandle = setInterval(() => {
-        // eslint-disable-next-line no-shadow
-        const time = +new Date();
-        const currentRequests = requests;
+      intervalHandle = setInterval(
+        () => {
+          const time = +new Date();
+          const currentRequests = requests;
 
-        // Reset data structure before executing callbacks
-        requests = {};
-        requestCount = 0;
+          // Reset data structure before executing callbacks
+          requests = {};
 
-        for (const key in currentRequests) {
-          if (currentRequests.hasOwnProperty(key)) {
+          entries(currentRequests).forEach(([key]) => {
             currentRequests[key](time);
             lastActive = time;
-          }
-        }
+          });
 
-        // Disable the timeout when nothing happens for a certain
-        // period of time
-        if (time - lastActive > 2500) {
-          clearInterval(intervalHandle);
-          intervalHandle = null;
-        }
-      }, 1000 / TARGET_FPS);
+          // Disable the timeout when nothing happens for a certain
+          // period of time
+          if (time - lastActive > 2500) {
+            clearInterval(intervalHandle);
+            intervalHandle = null;
+          }
+        },
+        1000 / TARGET_FPS,
+      );
     }
 
     return callbackHandle;

@@ -3,17 +3,18 @@
 
 /**
  * @param pos {Number} position between 0 (start of effect) and 1 (end of effect)
- **/
-export const easeOutCubic = (pos) => Math.pow(pos - 1, 3) + 1;
+ * */
+export const easeOutCubic = (pos) => (pos - 1) ** 3 + 1;
 
 /**
  * @param pos {Number} position between 0 (start of effect) and 1 (end of effect)
- **/
+ * */
 export const easeInOutCubic = (pos) => {
-  // eslint-disable-next-line no-cond-assign
-  if ((pos /= 0.5) < 1) {
-    return 0.5 * Math.pow(pos, 3);
-  }
+  let _pos = pos;
+  _pos /= 0.5;
 
-  return 0.5 * (Math.pow(pos - 2, 3) + 2);
+  if (_pos >= 1) {
+    return 0.5 * ((_pos - 2) ** 3 + 2);
+  }
+  return 0.5 * _pos ** 3;
 };

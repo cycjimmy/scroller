@@ -7,7 +7,7 @@
  * Copyright 2011, Zynga Inc.
  * Licensed under the MIT License.
  */
-
+import entries from '@cycjimmy/awesome-js-funcs/esm/object/entries';
 import requestAnimationFrame from './requestAnimationFrame';
 
 /**
@@ -59,7 +59,9 @@ export default class Animate {
    * Start the animation.
    *
    * @param stepCallback {Function} Pointer to function which is executed on every step.
-   *   Signature of the method should be `function(percent, now, virtual) { return continueWithAnimation; }`
+   *   Signature of the method should be `function(percent, now, virtual) {
+   *    return continueWithAnimation;
+   *   }`
    * @param verifyCallback {Function} Executed before every animation step.
    *   Signature of the method should be `function() { return continueWithAnimation; }`
    * @param completedCallback {Function}
@@ -76,19 +78,21 @@ export default class Animate {
     let lastFrame = start;
     let percent = 0;
     let dropCounter = 0;
-    const id = this.counter++;
+    const id = this.counter;
+    this.counter += 1;
+    let insideRoot = root;
 
-    if (!root) {
-      root = document.body;
+    if (!insideRoot) {
+      insideRoot = document.body;
     }
 
     // Compacting running db automatically every few new animations
     if (id % 20 === 0) {
       const newRunning = {};
-      // eslint-disable-next-line guard-for-in
-      for (const usedId in this.running) {
+      entries(this.running).forEach(([usedId]) => {
         newRunning[usedId] = true;
-      }
+      });
+
       this.running = newRunning;
     }
 
@@ -104,11 +108,11 @@ export default class Animate {
       if (!this.running[id] || (verifyCallback && !verifyCallback(id))) {
         this.running[id] = null;
         // eslint-disable-next-line no-unused-expressions
-        completedCallback &&
-          completedCallback(
+        completedCallback
+          && completedCallback(
             desiredFrames - dropCounter / ((now - start) / millisecondsPerSecond),
             id,
-            false
+            false,
           );
         return;
       }
@@ -116,11 +120,12 @@ export default class Animate {
       // For the current rendering to apply let's update omitted steps in memory.
       // This is important to bring internal state variables up-to-date with progress in time.
       if (render) {
-        const droppedFrames =
-          Math.round((now - lastFrame) / (millisecondsPerSecond / desiredFrames)) - 1;
-        for (let j = 0; j < Math.min(droppedFrames, 4); j++) {
+        const droppedFrames = Math.round(
+          (now - lastFrame) / (millisecondsPerSecond / desiredFrames),
+        ) - 1;
+        for (let j = 0; j < Math.min(droppedFrames, 4); j += 1) {
           step(true);
-          dropCounter++;
+          dropCounter += 1;
         }
       }
 
@@ -137,15 +142,15 @@ export default class Animate {
       if ((stepCallback(value, now, render) === false || percent === 1) && render) {
         this.running[id] = null;
         // eslint-disable-next-line no-unused-expressions
-        completedCallback &&
-          completedCallback(
+        completedCallback
+          && completedCallback(
             desiredFrames - dropCounter / ((now - start) / millisecondsPerSecond),
             id,
-            percent === 1 || duration == null
+            percent === 1 || duration == null,
           );
       } else if (render) {
         lastFrame = now;
-        requestAnimationFrame(step, root);
+        requestAnimationFrame(step, insideRoot);
       }
     };
 
@@ -153,7 +158,7 @@ export default class Animate {
     this.running[id] = true;
 
     // Init first step
-    requestAnimationFrame(step, root);
+    requestAnimationFrame(step, insideRoot);
 
     // Return unique animation ID
     return id;
