@@ -1,6 +1,5 @@
 # Scroller
 ![][workflows-badge-image]
-[![build status][travis-image]][travis-url]
 [![libraries dependency status][libraries-status-image]][libraries-status-url]
 [![libraries sourcerank][libraries-sourcerank-image]][libraries-sourcerank-url]
 [![Release date][release-date-image]][release-url]
@@ -38,7 +37,6 @@ These are the available options with their defaults. Options can be modified usi
 * zooming = `false`
 * minZoom = `0.5`
 * maxZoom = `3`
-
 
 ## Install
 [![NPM version][npm-image]][npm-url]
@@ -122,7 +120,7 @@ To use via a CDN include this in your HTML:
 ```
 
 ## License
-MIT © 2020 cycjimmy and 2011 Zynga
+MIT © 2020-2022 cycjimmy and 2011 Zynga
 
 <!-- Links: -->
 [npm-image]: https://img.shields.io/npm/v/@cycjimmy/scroller
@@ -136,8 +134,6 @@ MIT © 2020 cycjimmy and 2011 Zynga
 [jsdelivr-url]: https://www.jsdelivr.com/package/npm/@cycjimmy/scroller
 
 [workflows-badge-image]: https://github.com/cycjimmy/scroller/workflows/Test%20CI/badge.svg
-[travis-image]: https://img.shields.io/travis/cycjimmy/scroller
-[travis-url]: https://travis-ci.org/cycjimmy/scroller
 
 [libraries-status-image]: https://img.shields.io/librariesio/release/npm/@cycjimmy/scroller
 [libraries-sourcerank-image]: https://img.shields.io/librariesio/sourcerank/npm/@cycjimmy/scroller
