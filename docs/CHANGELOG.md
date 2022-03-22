@@ -1,3 +1,15 @@
+# [2.0.0](https://github.com/cycjimmy/scroller/compare/v1.1.0...v2.0.0) (2022-03-22)
+
+
+### Features
+
+* change to module mode ([ed22bd2](https://github.com/cycjimmy/scroller/commit/ed22bd2581973810f15eb6a3c373604bd05952ff))
+
+
+### BREAKING CHANGES
+
+* change to module mode
+
 # [1.1.0](https://github.com/cycjimmy/scroller/compare/v1.0.0...v1.1.0) (2020-04-30)
 
 
