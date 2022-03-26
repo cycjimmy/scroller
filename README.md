@@ -116,7 +116,7 @@ See Zynga/Scroller demos online here: http://zynga.github.com/scroller/
 
 To use via a CDN include this in your HTML:
 ```text
-<script src="https://cdn.jsdelivr.net/npm/@cycjimmy/scroller@1/dist/scroller.umd.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@cycjimmy/scroller@3/dist/scroller.umd.min.js"></script>
 ```
 
 ## License
