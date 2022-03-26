@@ -1,3 +1,15 @@
+# [3.0.0](https://github.com/cycjimmy/scroller/compare/v2.0.0...v3.0.0) (2022-03-26)
+
+
+### Features
+
+* refactoring build tasks ([1a8aa3b](https://github.com/cycjimmy/scroller/commit/1a8aa3b41ae60e39bce2c3bd12d5318e1f929aa1))
+
+
+### BREAKING CHANGES
+
+* refactoring build tasks
+
 # [2.0.0](https://github.com/cycjimmy/scroller/compare/v1.1.0...v2.0.0) (2022-03-22)
 
 
