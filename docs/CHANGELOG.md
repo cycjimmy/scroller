@@ -1,3 +1,10 @@
+## [3.0.1](https://github.com/cycjimmy/scroller/compare/v3.0.0...v3.0.1) (2022-03-26)
+
+
+### Bug Fixes
+
+* fix root version after releasing ([aaf0d01](https://github.com/cycjimmy/scroller/commit/aaf0d01167dd0492d2f855c70a65a530c44883bf))
+
 # [3.0.0](https://github.com/cycjimmy/scroller/compare/v2.0.0...v3.0.0) (2022-03-26)
 
 
