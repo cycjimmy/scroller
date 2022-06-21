@@ -1,6 +1,6 @@
 {
   "name": "@cycjimmy/scroller",
-  "version": "3.0.1",
+  "version": "3.0.2",
   "description": "Accelerated panning and zooming for HTML and Canvas",
   "type": "module",
   "main": "dist/scroller.cjs",

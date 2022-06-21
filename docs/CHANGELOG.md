@@ -1,3 +1,10 @@
+## [3.0.2](https://github.com/cycjimmy/scroller/compare/v3.0.1...v3.0.2) (2022-06-21)
+
+
+### Bug Fixes
+
+* remove @rollup/plugin-commonjs ([e707283](https://github.com/cycjimmy/scroller/commit/e7072837f331b66dd22490bf7caa75697e0a39de))
+
 ## [3.0.1](https://github.com/cycjimmy/scroller/compare/v3.0.0...v3.0.1) (2022-03-26)
 
 
