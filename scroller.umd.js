@@ -194,7 +194,7 @@
      * @param id {Integer} Unique animation ID
      * @return {Boolean} Whether the animation was stopped (aka, was running before)
      */
-    _createClass(Animate, [{
+    return _createClass(Animate, [{
       key: "stop",
       value: function stop(id) {
         var cleared = this.running[id] !== null;
@@ -316,7 +316,6 @@
         return id;
       }
     }]);
-    return Animate;
   }();
 
   // Easing Equations (c) 2003 Robert Penner, all rights reserved.
@@ -562,7 +561,7 @@
      * @param contentWidth {Integer ? null} Outer width of inner element
      * @param contentHeight {Integer ? null} Outer height of inner element
      */
-    _createClass(_default, [{
+    return _createClass(_default, [{
       key: "setDimensions",
       value: function setDimensions(clientWidth, clientHeight, contentWidth, contentHeight) {
         // Only update values which are defined
@@ -1494,7 +1493,6 @@
         }
       }
     }]);
-    return _default;
   }();
 
   return _default;
