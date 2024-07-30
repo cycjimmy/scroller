@@ -252,7 +252,7 @@
         }
 
         // This is the internal step method which is called every few milliseconds
-        var step = function step(virtual) {
+        var _step = function step(virtual) {
           // Normalize virtual value
           var render = virtual !== true;
 
@@ -272,7 +272,7 @@
           if (render) {
             var droppedFrames = Math.round((now - lastFrame) / (millisecondsPerSecond / desiredFrames)) - 1;
             for (var j = 0; j < Math.min(droppedFrames, 4); j += 1) {
-              step(true);
+              _step(true);
               dropCounter += 1;
             }
           }
@@ -293,7 +293,7 @@
             completedCallback && completedCallback(desiredFrames - dropCounter / ((now - start) / millisecondsPerSecond), id, percent === 1 || duration == null);
           } else if (render) {
             lastFrame = now;
-            requestAnimationFrame(step, insideRoot);
+            requestAnimationFrame(_step, insideRoot);
           }
         };
 
@@ -301,7 +301,7 @@
         this.running[id] = true;
 
         // Init first step
-        requestAnimationFrame(step, insideRoot);
+        requestAnimationFrame(_step, insideRoot);
 
         // Return unique animation ID
         return id;
