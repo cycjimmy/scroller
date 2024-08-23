@@ -86,7 +86,7 @@
    * @param obj
    * @returns {Iterator.<*>|*}
    */
-  var entries = (obj => {
+  var entries = obj => {
     var replaceFunc = o => {
       var arr = [];
       Object.keys(o).forEach(key => {
@@ -98,7 +98,7 @@
       return Object.entries(obj);
     }
     return replaceFunc(obj);
-  });
+  };
 
   /**
    * A requestAnimationFrame wrapper / polyfill.
