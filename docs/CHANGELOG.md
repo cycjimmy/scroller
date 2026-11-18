@@ -1,3 +1,13 @@
+# [4.0.0](https://github.com/cycjimmy/scroller/compare/v3.0.3...v4.0.0) (2026-11-18)
+
+
+* feat!: rebuild the package on TypeScript, Vite 8 and an ESM-only output ([945651d](https://github.com/cycjimmy/scroller/commit/945651d00593d63929963041e7579d74568a455d))
+
+
+### BREAKING CHANGES
+
+* the CommonJS bundle is gone and the browser targets no longer include IE; the package now ships an ESM entry plus UMD builds only.
+
 ## [3.0.3](https://github.com/cycjimmy/scroller/compare/v3.0.2...v3.0.3) (2024-07-17)
 
 

@@ -1,7 +1,7 @@
 {
   "name": "@cycjimmy/scroller",
   "type": "module",
-  "version": "3.0.3",
+  "version": "4.0.0",
   "description": "Accelerated panning and zooming for HTML and Canvas",
   "author": "cycjimmy <cycjimmy@gmail.com> (https://github.com/cycjimmy)",
   "license": "MIT",
