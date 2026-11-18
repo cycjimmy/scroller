@@ -1,0 +1,13 @@
+import antfu from '@antfu/eslint-config'
+
+export default antfu({
+  type: 'lib',
+  typescript: true,
+  ignores: [
+    '.release/**',
+    '.publish/**',
+    'dist/**',
+    'coverage/**',
+    'docs/**',
+  ],
+})

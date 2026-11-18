@@ -1,0 +1,13 @@
+{
+  "extends": "./tsconfig.json",
+  "compilerOptions": {
+    "rootDir": "src",
+    "declaration": true,
+    "emitDeclarationOnly": true,
+    "noEmit": false,
+    // The public shape is a default-exported class, which `isolatedDeclarations`
+    // would reject; the declarations are generated from the source instead.
+    "outDir": "dist"
+  },
+  "include": ["src"]
+}
