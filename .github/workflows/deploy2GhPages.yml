@@ -22,6 +22,9 @@ permissions:
   contents: read
   pages: write
   id-token: write
+  # Declaring `permissions` sets every unlisted scope to `none`, and the guard
+  # below reads the run's artifact list through the Actions API.
+  actions: read
 
 # One deployment at a time. Cancelling a running one would publish a half
 # written site, so a second run waits instead.
@@ -57,6 +60,34 @@ jobs:
         uses: actions/upload-pages-artifact@v5
         with:
           path: .publish
+
+      # `upload-pages-artifact` can finish before the run's artifact listing is
+      # updated, and `deploy-pages` looks the artifact up by name through that
+      # listing: on 2026-11-23 the upload finalized 0.3s before `deploy-pages`
+      # asked, so it saw `Found 0 artifact(s)` and failed a deployment whose
+      # artifact was already stored. Poll the very endpoint `deploy-pages` reads
+      # instead of sleeping for an arbitrary interval.
+      - name: Wait for the build output to be listed
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          REPO: ${{ github.repository }}
+          RUN_ID: ${{ github.run_id }}
+          ARTIFACT_NAME: github-pages
+        run: |
+          for attempt in $(seq 1 30); do
+            if gh api "repos/$REPO/actions/runs/$RUN_ID/artifacts" \
+              | jq -e --arg name "$ARTIFACT_NAME" \
+                'any(.artifacts[]; .name == $name)' > /dev/null; then
+              echo "The $ARTIFACT_NAME artifact is listed."
+              exit 0
+            fi
+
+            echo "Waiting for the $ARTIFACT_NAME artifact to be listed (attempt $attempt)."
+            sleep 2
+          done
+
+          echo "::error::The $ARTIFACT_NAME artifact never appeared in the run's artifact listing."
+          exit 1
 
       - name: Deploy to GitHub Pages
         id: deployment
